@@ -1,7 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.button`
-  background: red;
+export type ButtonStyle = "primary" | "secondary";
+
+type ButtonContainer = {
+  variant: ButtonStyle;
+};
+
+const COLORS = {
+  primary: "PRIMARY700",
+  secondary: "PRIMARY500",
+} as const;
+
+export const Container = styled.button<ButtonContainer>`
+  background: ${({ theme, variant }) => theme.colors[COLORS[variant]]};
   border-radius: 8px;
   font-size: 1.4rem;
   font-weight: 700;

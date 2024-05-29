@@ -4,11 +4,12 @@ import { Button } from "../Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type InputTypes = {
+  name: string;
   email: string;
   password: string;
 };
 
-export function FormLogin() {
+export function FormSignUp() {
   const navigate = useNavigate();
   const {
     register,
@@ -20,12 +21,27 @@ export function FormLogin() {
   const onSubmiit: SubmitHandler<InputTypes> = (data) => {
     console.log(data);
     reset();
+    navigate("/");
   };
 
   return (
     <Container>
-      <h2>Faça seu Login</h2>
+      <h2>Faça seu Cadastro</h2>
       <form onSubmit={handleSubmit(onSubmiit)}>
+        <section>
+          <label>
+            Name:
+            <input
+              type="text"
+              placeholder="Digite seu Nome"
+              {...register("name", {
+                required: "campo obrigatório",
+              })}
+            />
+          </label>
+          <span className="inputError">{errors.name?.message}</span>
+        </section>
+
         <section>
           <label>
             Email:
@@ -52,19 +68,29 @@ export function FormLogin() {
               placeholder="Digite sua Senha"
               {...register("password", {
                 required: "Campo obrigatório",
+                minLength: {
+                  value: 7,
+                  message: "A senha deve ter no mínimo 7 dígitos",
+                },
+                pattern: {
+                  value:
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
+                  message:
+                    "A senha deve ter número, letra maiúscula e caractere especial",
+                },
               })}
             />
           </label>
           <span className="inputError">{errors.password?.message}</span>
         </section>
 
-        <Button title="Login" loading={false} />
+        <Button title="Finalizar" loading={false} variant="secondary" />
       </form>
 
-      <span className="messageChangePage">Não tem uma conta? </span>
+      <span className="messageChangePage">Já tem uma conta? </span>
 
-      <button className="buttonChangePage" onClick={() => navigate("/signup")}>
-        Registre-se
+      <button className="buttonChangePage" onClick={() => navigate("/")}>
+        Login
       </button>
     </Container>
   );
