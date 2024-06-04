@@ -2,8 +2,22 @@ import { Container } from "./styles";
 import logo from "../../assets/logo-rj.png";
 import { Link } from "react-router-dom";
 import { FormSignUp } from "../../components/FormSignUp";
+import { useEffect, useState } from "react";
 
 export function SignUp() {
+  const [deley, setDeley] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDeley(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (deley) {
+    return null;
+  }
   return (
     <>
       <Container>
