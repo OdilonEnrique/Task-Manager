@@ -5,7 +5,6 @@ import { StatsCard } from "../../components/StatsCard";
 
 export function Home() {
   const { data } = useQueryUser();
-  console.log(data);
 
   return (
     <>
