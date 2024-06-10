@@ -1,9 +1,23 @@
+import { useState } from "react";
 import { Pagination } from "../../components/Pagination";
-import { TaskCard } from "../../components/TaskCard";
+import { TaskCard, TaskDataTypes } from "../../components/TaskCard";
 import { useQueryTasks } from "../../hooks/useQueryTasks";
 import { Container } from "./styles";
+import { ModalTaksDatails } from "../../components/ModalTasksDetails";
 
 export function Tasks() {
+  const [showModal, setShowModal] = useState(false);
+  const [taskDetails, setTaskDetails] = useState({} as TaskDataTypes);
+
+  function toggleModal() {
+    setShowModal((prevValue) => (prevValue == true ? false : true));
+  }
+
+  function addTaksDetails(task: TaskDataTypes) {
+    setTaskDetails(task);
+    toggleModal();
+  }
+
   const {
     data,
     page,
@@ -33,7 +47,7 @@ export function Tasks() {
               prevPage={prevPage}
               nextPage={nextPage}
               changeLimit={changeLimit}
-            />  
+            />
           </div>
         </div>
 
@@ -45,7 +59,13 @@ export function Tasks() {
             <p className="loadining"> Sem tarefas para mostrar</p>
           ) : (
             data?.map((task) => {
-              return <TaskCard data={task} key={task.id} onClick={() => {}} />;
+              return (
+                <TaskCard
+                  data={task}
+                  key={task.id}
+                  onClick={() => addTaksDetails(task)}
+                />
+              );
             })
           )}
         </div>
@@ -60,6 +80,8 @@ export function Tasks() {
             changeLimit={changeLimit}
           />
         </div>
+
+        {showModal && <ModalTaksDatails task={taskDetails} toggleModal={toggleModal}/>}
       </Container>
     </>
   );

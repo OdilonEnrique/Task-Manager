@@ -33,7 +33,7 @@ export function SideBar({ toggleSideBar }: SideBarTypes) {
                 <MenuItem title="Home" icon="home" />
               </NavLink>
 
-              <NavLink to={"/tasks"} onClick={toggleSideBar}>
+              <NavLink to={"/tasks?filter=all&page=1"} onClick={toggleSideBar}>
                 <MenuItem title="Tarefa" icon="task" />
               </NavLink>
 
