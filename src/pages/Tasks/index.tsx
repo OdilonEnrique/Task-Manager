@@ -3,7 +3,7 @@ import { Pagination } from "../../components/Pagination";
 import { TaskCard, TaskDataTypes } from "../../components/TaskCard";
 import { useQueryTasks } from "../../hooks/useQueryTasks";
 import { Container } from "./styles";
-import { ModalTaksDatails } from "../../components/ModalTasksDetails";
+import { ModalTaksDetails } from "../../components/ModalTasksDetails";
 
 export function Tasks() {
   const [showModal, setShowModal] = useState(false);
@@ -81,7 +81,7 @@ export function Tasks() {
           />
         </div>
 
-        {showModal && <ModalTaksDatails task={taskDetails} toggleModal={toggleModal}/>}
+        {showModal && <ModalTaksDetails task={taskDetails} toggleModal={toggleModal}/>}
       </Container>
     </>
   );

@@ -1,3 +1,4 @@
+import { FormMutationTask } from "../FormMutationTask";
 import { TaskDataTypes } from "../TaskCard";
 import { Container } from "./style";
 
@@ -6,7 +7,7 @@ export type ModalTasksDetailsTypes = {
   task: TaskDataTypes;
 };
 
-export function ModalTaksDatails({
+export function ModalTaksDetails({
   toggleModal,
   task,
 }: ModalTasksDetailsTypes) {
@@ -21,8 +22,11 @@ export function ModalTaksDatails({
                 close
               </i>
             </div>
-            {task.title}
-            {/* form */}
+            <FormMutationTask
+              isUpdate={true}
+              toggleModal={toggleModal}
+              taskData={task}
+            />
           </div>
         </div>
       </Container>
