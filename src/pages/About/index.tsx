@@ -21,7 +21,7 @@ export function About() {
             >
               Node.js
             </a>
-            , Usando o conceito de SPA (Single Page Application) e a arquitetura
+            . Usando o conceito de SPA (Single Page Application) e a arquitetura
             RESTful API (Representational State Transfer), para a conclusão do
             Curso de Desenvolvimento Web ofertado pelo{" "}
             <a

@@ -67,6 +67,19 @@ export const Container = styled.div`
       width: 0.75rem;
     }
 
+    &::-webkit-scrollbar-track {
+      background: ${({ theme }) => theme.colors.DARK200};
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.colors.LIGHT200};
+      border-radius: 0.8rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.colors.LIGHT400};
+    }
+
     section + section {
       margin-top: 2.4rem;
     }
