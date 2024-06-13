@@ -41,10 +41,9 @@ $ npm run dev
 
 ```ini
 VITE_API=""
-VITE_STORAGE_USERID_KEY=""
 ```
 
 ## Links
 
-- [Deploy](https://task-manager-seven-indol.vercel.app/)
+- [Deploy](https://task-manager-seven-beta.vercel.app/)
 - [API Repository](https://github.com/OdilonEnrique/Task-Manager-API)
