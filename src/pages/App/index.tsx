@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import { Container } from "./style";
-import { Header } from "../../components/Header";
 import { SideBar } from "../../components/SideBar";
+import { Header } from "../../components/Header";
+import { Container } from "./styles";
+import { Outlet } from "react-router-dom";
 import { Footer } from "../../components/Footer";
 
 export function App() {
@@ -13,9 +13,8 @@ export function App() {
         <section className="sideBar">
           <SideBar />
         </section>
-
-        <Outlet />
-        {/* outlet is main pages */}
+        
+        <Outlet /> {/*Main*/}
       </article>
 
       <Footer />

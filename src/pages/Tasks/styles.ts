@@ -46,7 +46,7 @@ export const Container = styled.main`
   }
 
   .paginationMobile {
-    margin-top: 2.8rem;
+    margin-top: 3.2rem;
   }
 
   @media (min-width: 768px) {
@@ -64,6 +64,8 @@ export const Container = styled.main`
 
     .tasksContainer {
       height: 60vh;
+      gap: 1rem;
+      padding-right: 0.8rem;
     }
 
     .paginationMobile {

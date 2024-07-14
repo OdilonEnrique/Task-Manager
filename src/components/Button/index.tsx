@@ -1,18 +1,18 @@
-import { ButtonStyleType, Container } from "./style";
+import { ButtonStyle, Container } from "./style";
 import loadingGif from "../../assets/loading.gif";
+import React from "react";
 
 type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   title: string;
   loading?: boolean;
-  variant?: ButtonStyleType;
-  onClick?: () => void;
+  variant?: ButtonStyle;
 };
 
 export function Button({
   title,
-  type = "submit",
   loading = false,
-  variant = "PRIMARY700",
+  variant = "primary",
+  type = "submit",
   onClick,
 }: ButtonTypes) {
   return (

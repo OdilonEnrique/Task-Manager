@@ -10,7 +10,7 @@ export const Container = styled.div`
   transition: 100ms;
 
   &:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.2);
     cursor: pointer;
   }
 
@@ -27,11 +27,11 @@ export const Container = styled.div`
   }
 
   .completed {
-    background: ${({ theme }) => theme.colors.CHECK500}CC;
+    background: ${({ theme }) => theme.colors.CHECK}CC;
   }
 
   .pending {
-    background: ${({ theme }) => theme.colors.COMPLEMENTARY500}CC;
+    background: ${({ theme }) => theme.colors.COMPLEMENTARY}CC;
   }
 
   .late {

@@ -1,5 +1,5 @@
-import { Container } from "./style";
 import { Link } from "react-router-dom";
+import { Container } from "./styles";
 
 export function Footer() {
   return (

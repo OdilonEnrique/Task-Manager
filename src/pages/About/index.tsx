@@ -1,35 +1,28 @@
-import { Container } from "./style";
+import { Container } from "./styles";
 
 export function About() {
   return (
-    <Container className="scrollBar">
-      <article>
+    <Container>
+      <article id="aboutContainer">
         <section>
           <h2>Sobre a Task Manager do Reprograma Jucás</h2>
           <p>
-            A Task Manager é uma aplicação Full Stack desenvolvida para a conclusão do
-            Curso de Desenvolvimento Web ofertado pelo{" "}
-            <a href="https://emanuelquintino.github.io/Page-WDC/" target="_blank">
-              Reprograma Jucás
-            </a>
-            , usando{" "}
-            <a
-              href="https://github.com/EmanuelQuintino/Task-Manager-WDC/"
-              target="_blank"
-            >
+            A Task Manager é uma aplicação Full Stack desenvolvida com{" "}
+            <a href="https://github.com/CiceroEduardo84/Task-Manager" target="_blank">
               React
             </a>{" "}
             e{" "}
-            <a
-              href="https://github.com/EmanuelQuintino/Task-Manager-WDC-API/"
-              target="_blank"
-            >
+            <a href="https://github.com/CiceroEduardo84/Task-Manager-API.git" target="_blank">
               Node.js
             </a>
-            , com o conceito de SPA (Single Page Application) e a arquitetura RESTful API
-            (Representational State Transfer). Nela os usuários dispõem de uma interface
-            para gerenciar e monitorar suas tarefas de forma organizada e intuitiva, além
-            de contar também com sua versão responsiva para uso em celulares.
+            . Usando o conceito de SPA (Single Page Application) e a arquitetura RESTful
+            API (Representational State Transfer), para a conclusão do Curso de
+            Desenvolvimento Web ofertado pelo{" "}
+            <a href="https://emanuelquintino.github.io/Page-WDC/" target="_blank">
+              Reprograma Jucás
+            </a>
+            . Nela os usuários dispõem de ferramentas para gerenciar, monitorar e gerar
+            relatórios das suas tarefas de forma organizada e intuitiva.
           </p>
         </section>
 
