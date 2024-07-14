@@ -1,12 +1,9 @@
-import { Container } from "./styles";
-
+import { Container } from "./style";
 
 export function Page404() {
   return (
-    <>
-      <Container>
-        <h1>Page404</h1>
-      </Container>
-    </>
+    <Container>
+      <strong>Erro 404: Página não encontrada!</strong>
+    </Container>
   );
 }

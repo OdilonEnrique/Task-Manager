@@ -3,27 +3,22 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
 import { useTaskCreate } from "../../hooks/useTaskCreate";
-import { useEffect, useState } from "react";
-import { TaskDataTypes } from "../TaskCard";
-import { useTaskUpdate } from "../../hooks/useTaskUpdate";
+import { useEffect } from "react";
+import { useTask } from "../../hooks/useTask";
+import { updateDate3HoursAgo } from "../../utils/updateDate3HoursAgo";
+import { toast } from "react-toastify";
 import { useQueryTasks } from "../../hooks/useQueryTasks";
-import { API } from "../../configs/api";
+import { useTaskUpdate } from "../../hooks/useTaskUpdate";
+import { TaskDataTypes } from "../../@types/tasks";
 
 type Inputs = TaskDataTypes & { time: string };
 
 type PropsToForm = {
   isUpdate?: boolean;
   toggleModal?: () => void;
-  taskData?: TaskDataTypes;
 };
 
-export function FormMutationTask({
-  isUpdate = false,
-  toggleModal,
-  taskData,
-}: PropsToForm) {
-  const [isLoading, setIsLoading] = useState(false);
-
+export function FormMutationTask({ isUpdate = false, toggleModal }: PropsToForm) {
   const {
     register,
     handleSubmit,
@@ -35,32 +30,23 @@ export function FormMutationTask({
   const mutateTaskUpdate = useTaskUpdate();
   const navigate = useNavigate();
 
-  const { refetch } = useQueryTasks();
-
-  function updateDate3HoursAgo(date: Date) {
-    return new Date(new Date(date).getTime() - 1000 * 60 * 60 * 3);
-  }
+  const { refetchQueryTask } = useQueryTasks();
+  const { taskData, deleteTask, isLoading } = useTask();
 
   async function handleDeleteTask(id?: string) {
     if (id && toggleModal) {
       const resp = confirm("Deseja remover tarefa?");
 
       if (resp) {
-        setIsLoading(true);
-        await API.delete(`/task/${taskData?.id}`)
-          .then(() => {
-            alert("Tarefa deletada com sucesso");
-            toggleModal();
-            refetch();
-          })
-          .catch((error) => {
-            console.error(error);
-            alert("Erro ao deletar tarefa");
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
+        const isDeleted = await deleteTask(id);
+        if (isDeleted) {
+          refetchQueryTask();
+          toggleModal();
+        }
       }
+    } else {
+      toast.dismiss();
+      toast.error("Tarefa não informada!");
     }
   }
 
@@ -71,7 +57,7 @@ export function FormMutationTask({
 
     if (isUpdate) {
       mutateTaskUpdate.mutate({
-        id: taskData?.id,
+        id: taskData.id,
         title,
         description,
         date: dateAndTime,
@@ -96,25 +82,20 @@ export function FormMutationTask({
 
   useEffect(() => {
     if (toggleModal && mutateTaskUpdate.isSuccess) {
-      refetch();
+      refetchQueryTask();
       toggleModal();
       reset();
     }
-  }, [mutateTaskUpdate.isSuccess, refetch, toggleModal, reset]);
+  }, [mutateTaskUpdate.isSuccess, refetchQueryTask, toggleModal, reset]);
 
   useEffect(() => {
-    if (isUpdate && taskData) {
+    if (isUpdate) {
       reset({
         title: taskData.title || "",
         description: taskData.description || "",
-        date: taskData.date
-          ? new Date(taskData.date).toISOString().split("T")[0]
-          : "",
+        date: taskData.date ? new Date(taskData.date).toISOString().split("T")[0] : "",
         time: taskData.date
-          ? updateDate3HoursAgo(new Date(taskData.date))
-              .toISOString()
-              .split("T")[1]
-              .slice(0, 5)
+          ? new Date(taskData.date).toISOString().split("T")[1].slice(0, 5)
           : "",
         status: taskData.status || "pending",
       });
@@ -211,22 +192,22 @@ export function FormMutationTask({
           <Button
             title={"Atualizar"}
             loading={mutateTaskUpdate.isPending}
-            variant={"update"}
+            variant={"COMPLEMENTARY500"}
             type="submit"
           />
           <Button
             title={"Remover"}
             loading={isLoading}
-            variant={"delete"}
+            variant={"DANGER200"}
             type="button"
-            onClick={() => handleDeleteTask(taskData?.id)}
+            onClick={() => handleDeleteTask(taskData.id)}
           />
         </div>
       ) : (
         <Button
           title={"Adicionar"}
           loading={mutateTaskCreate.isPending}
-          variant={"create"}
+          variant={"CHECK500"}
           type="submit"
         />
       )}

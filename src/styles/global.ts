@@ -6,7 +6,7 @@ export const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
   }
   
-  * {
+  *, input, select, textarea {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -20,6 +20,11 @@ export const GlobalStyles = createGlobalStyle`
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    &:focus {
+      outline: transparent;
+      box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.LIGHT400}
+    }
   }
 
   body {
@@ -51,7 +56,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .inputError {
-    color: ${({ theme }) => theme.colors.COMPLEMENTARY};
+    color: ${({ theme }) => theme.colors.COMPLEMENTARY400};
     font-size: 1.2rem;
     display: block;
     position: absolute;
@@ -70,6 +75,35 @@ export const GlobalStyles = createGlobalStyle`
     inset: 0;
   }
 
+  .queryError {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: ${({ theme }) => theme.colors.COMPLEMENTARY500};
+    display: grid;
+    place-content: center;
+    position: absolute;
+    inset: 0;
+  }
+
+  .scrollBar {
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: ${({ theme }) => theme.colors.DARK200};
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.colors.LIGHT200}88;
+      border-radius: 0.8rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.colors.LIGHT400}88;
+    }
+  }
+
   @media (min-width: 768px) {
     .inputError {
       font-size: 1.4rem;
@@ -77,6 +111,16 @@ export const GlobalStyles = createGlobalStyle`
 
     .loading {
       font-size: 1.4rem;
-    } 
+    }
+
+    .queryError {
+      font-size: 1.4rem;
+    }
+
+    .scrollBar {
+      &::-webkit-scrollbar {
+        width: 0.75rem;
+      }
+    }
   }
 `;

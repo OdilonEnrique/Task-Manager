@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  text-align: center;
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
   form {
     width: 32rem;
     margin: 0 auto;
@@ -37,25 +31,7 @@ export const Container = styled.div`
     }
   }
 
-  .messageChangePage {
-    font-size: 1.4rem;
-  }
-
-  .buttonChangePage {
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-decoration: underline;
-  }
-
-  button {
-    margin-top: 4.2rem;
-  }
-
   @media (min-width: 768px) {
-    h2 {
-      font-size: 2.4rem;
-    }
-
     form {
       width: 42rem;
 
@@ -66,14 +42,6 @@ export const Container = styled.div`
       input {
         font-size: 1.6rem;
       }
-    }
-
-    .messageChangePage {
-      font-size: 1.6rem;
-    }
-
-    .buttonChangePage {
-      font-size: 1.6rem;
     }
   }
 `;

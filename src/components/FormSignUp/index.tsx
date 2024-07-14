@@ -1,51 +1,52 @@
-import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
-import { Button } from "../Button";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "../Button";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-type InputTypes = {
+type Inputs = {
   name: string;
   email: string;
   password: string;
 };
 
 export function FormSignUp() {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<InputTypes>();
+  } = useForm<Inputs>();
 
   const { signUp, isLoading } = useAuth();
+  const navigate = useNavigate();
 
-  const onSubmiit: SubmitHandler<InputTypes> = async ({
-    name,
-    email,
-    password,
-  }) => {
-    const userCreated = await signUp({ name, email, password });
+  const onSubmit: SubmitHandler<Inputs> = async ({ name, email, password }) => {
+    const isUserCreated = await signUp({ name, email, password });
 
-    if (userCreated) {
-      reset();
+    if (isUserCreated) {
       navigate("/");
+      reset();
     }
   };
 
   return (
     <Container>
-      <h2>Faça seu Cadastro</h2>
-      <form onSubmit={handleSubmit(onSubmiit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <section>
           <label>
-            Name:
+            Nome:
             <input
               type="text"
-              placeholder="Digite seu Nome"
+              placeholder="digite seu nome"
+              autoFocus
               {...register("name", {
-                required: "campo obrigatório",
+                required: "Campo obrigatório",
+                minLength: { value: 3, message: "Mínimo de 3 caracteres" },
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/i,
+                  message: "Apenas letras são permitidas",
+                },
               })}
             />
           </label>
@@ -59,7 +60,7 @@ export function FormSignUp() {
               type="email"
               placeholder="exemplo@email.com"
               {...register("email", {
-                required: "campo obrigatório",
+                required: "Campo obrigatório",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "Endereço de e-mail inválido",
@@ -75,7 +76,7 @@ export function FormSignUp() {
             Senha:
             <input
               type="password"
-              placeholder="Digite sua Senha"
+              placeholder="mínimo de 7 dígitos"
               {...register("password", {
                 required: "Campo obrigatório",
                 minLength: {
@@ -83,8 +84,7 @@ export function FormSignUp() {
                   message: "A senha deve ter no mínimo 7 dígitos",
                 },
                 pattern: {
-                  value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
                   message:
                     "A senha deve ter número, letra maiúscula e caractere especial",
                 },
@@ -94,14 +94,8 @@ export function FormSignUp() {
           <span className="inputError">{errors.password?.message}</span>
         </section>
 
-        <Button title="Finalizar" loading={isLoading} variant="secondary" />
+        <Button title={"Finalizar"} variant="PRIMARY500" loading={isLoading} />
       </form>
-
-      <span className="messageChangePage">Já tem uma conta? </span>
-
-      <button className="buttonChangePage" onClick={() => navigate("/")}>
-        Login
-      </button>
     </Container>
   );
 }

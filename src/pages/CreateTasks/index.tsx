@@ -1,17 +1,14 @@
 import { FormMutationTask } from "../../components/FormMutationTask";
-import { Container } from "./styles";
-
+import { Container } from "./style";
 
 export function CreateTasks() {
   return (
-    <>
-      <Container>
-        <h2>Adicionar Tarefas</h2>
+    <Container>
+      <h2>Adicionar Tarefa</h2>
 
-        <div className="formContainer">
-          <FormMutationTask />
-        </div>
-      </Container>
-    </>
+      <div className="formContainer">
+        <FormMutationTask />
+      </div>
+    </Container>
   );
 }

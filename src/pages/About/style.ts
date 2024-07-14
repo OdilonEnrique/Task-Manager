@@ -8,10 +8,10 @@ export const Container = styled.div`
   display: grid;
   place-content: start;
   text-align: justify;
+  padding-right: 0.8rem;
 
   &::-webkit-scrollbar {
-    width: 0;
-    -ms-overflow-style: none;
+    width: 0.4rem;
   }
 
   article {
@@ -65,19 +65,6 @@ export const Container = styled.div`
 
     &::-webkit-scrollbar {
       width: 0.75rem;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: ${({ theme }) => theme.colors.DARK200};
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: ${({ theme }) => theme.colors.LIGHT200};
-      border-radius: 0.8rem;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: ${({ theme }) => theme.colors.LIGHT400};
     }
 
     section + section {

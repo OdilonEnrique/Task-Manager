@@ -1,41 +1,50 @@
-import { Container } from "./styles";
-import logo from "../../assets/logo-reprograma-jucas.png";
-import { Link } from "react-router-dom";
 import { FormLogin } from "../../components/FormLogin";
+import { Container } from "./style";
+import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 
 export function SignIn() {
-  const [deley, setDeley] = useState(true);
+  const navigate = useNavigate();
+  const { isLoading } = useAuth();
+  const [delay, setDelay] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDeley(false);
+      setDelay(false);
     }, 300);
 
     return () => clearTimeout(timer);
   }, []);
 
-  if (deley) {
+  if (delay) {
     return null;
   }
+
   return (
-    <>
-      <Container>
-        <div className="signInPart1">
-          <div>
-            <h1>Task Manager</h1>
-            <Link
-              to={"https://emanuelquintino.github.io/Page-WDC"}
-              target="_blank"
-            >
-              <img src={logo} alt="" />
-            </Link>
-          </div>
+    <Container>
+      <div className="signInLogo">
+        <div>
+          <h1>Task Manager</h1>
+          <Link to={"https://emanuelquintino.github.io/Page-WDC/"} target="_blank">
+            <img src={logoReprogramaJucas} alt="logo-reprograma-jucas" />
+          </Link>
         </div>
-        <div className="signInPart2">
-          <FormLogin />
+      </div>
+
+      <div className="signInForm">
+        <h2>Faça seu login</h2>
+
+        <FormLogin />
+
+        <div className="messageChangePage">
+          <span>Não tem uma conta? </span>
+          <button onClick={() => navigate("/sign-up")} disabled={isLoading}>
+            Registre-se
+          </button>
         </div>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 }
